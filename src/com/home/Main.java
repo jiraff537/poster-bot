@@ -23,7 +23,7 @@ public class Main {
                 "                                                                            ");
         System.out.println("01010000 01101111 01110011 01110100 01100101 01110010 01000010 01101111 01110100 ");
         System.out.println("---====<<<<<>>>>>====---");
-        System.out.println("(c) 2023 Alexei A Danilov, Igor A Hitrov");
+        System.out.println("(c) 2023 Alexei A Danilov, Igor A Khitrov");
 
     }
 }
