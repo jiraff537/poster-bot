@@ -1,5 +1,7 @@
 package com.home;
 
+import org.w3c.dom.ls.LSOutput;
+
 public class Main {
     public static void main(String[] args) {
         //Jus init console
@@ -9,6 +11,7 @@ public class Main {
     }
 
     private static void justInitConsole() {
+        System.out.println("---====<<<<<>>>>>====---");
         System.out.println("                                                                            \n" +
                 "                                                                            \n" +
                 "`7MM\"\"\"Mq.                    mm                 `7MM\"\"\"Yp,           mm    \n" +
@@ -21,6 +24,7 @@ public class Main {
                 "                                                                            \n" +
                 "                                                                            ");
         System.out.println("01010000 01101111 01110011 01110100 01100101 01110010 01000010 01101111 01110100 ");
+        System.out.println("---====<<<<<>>>>>====---");
         System.out.println("(c) 2023 Alexei A Danilov, Igor A Hitrov");
 
     }
