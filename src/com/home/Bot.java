@@ -66,7 +66,7 @@ public class Bot extends TelegramLongPollingBot {
         else
             //TODO наверное тут есть смысл выводить
             // сообщение что такой команды нет и правила
-            response = "Сообщение не распознано попробуйте /get";
+            response = "echo= ".concat(textMsg).concat(" Сообщение не распознано попробуйте /get");
         return response;
     }
 }
