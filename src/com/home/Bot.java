@@ -39,7 +39,8 @@ public class Bot extends TelegramLongPollingBot {
                 //Достаем из inMess id чата пользователя
                 String chatId = inMess.getChatId().toString();
                 //Получаем текст сообщения пользователя, отправляем в написанный нами обработчик
-                String response = parseMessage(inMess.getText());
+                String response;
+                response = parseMessage(inMess.getText());
                 //Создаем объект класса SendMessage - наш будущий ответ пользователю
                 SendMessage outMess = new SendMessage();
 
@@ -60,13 +61,15 @@ public class Bot extends TelegramLongPollingBot {
 
         //Сравниваем текст пользователя с нашими командами, на основе этого формируем ответ
         if (textMsg.equals("/start"))
-            response = "Приветствую, бот знает много цитат. Жми /get, чтобы получить случайную из них";
+            response = "Приветствую, бот знает много цитат. Жми /get, чтобы получить случайную из них, либо жми /about и узнаешь разработчиков этого бота ";
+        else if (textMsg.equals("/about"))
+            response = "(c) 2023 Alexei A Danilov, Igor A Khitrov";
         else if (textMsg.equals("/get"))
             response = storage.getRandQuote();
         else
             //TODO наверное тут есть смысл выводить
             // сообщение что такой команды нет и правила
-            response = "Сообщение не распознано попробуйте /get";
+            response = "Сообщение не распознано попробуйте /get, либо жми /about и узнаешь разработчиков этого бота ";
         return response;
     }
 }
