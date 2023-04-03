@@ -39,8 +39,7 @@ public class Bot extends TelegramLongPollingBot {
                 //Достаем из inMess id чата пользователя
                 String chatId = inMess.getChatId().toString();
                 //Получаем текст сообщения пользователя, отправляем в написанный нами обработчик
-                String response;
-                response = parseMessage(inMess.getText());
+                String response = parseMessage(inMess.getText());
                 //Создаем объект класса SendMessage - наш будущий ответ пользователю
                 SendMessage outMess = new SendMessage();
 
