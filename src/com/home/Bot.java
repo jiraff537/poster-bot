@@ -60,7 +60,18 @@ public class Bot extends TelegramLongPollingBot {
 
         //Сравниваем текст пользователя с нашими командами, на основе этого формируем ответ
         if (textMsg.equals("/start"))
-            response = "Приветствую, бот знает много цитат. Жми /get, чтобы получить случайную из них, либо жми /about и узнаешь разработчиков этого бота ";
+            response = "Hello, first of we start \n" +
+                    "I mast to ask you: How would you prefer to name the situation has being happened since 22' February 24th in Ukraine? Is it a Special Military Operation (SMO) or a war? \n" +
+                    "Сhoose one of two according to your opinion' \n" +
+                    "/SMO \n" +
+                    "or \n" +
+                    "/war"; //Приветствую, бот знает много цитат. Жми /get, чтобы получить случайную из них, либо жми /about и узнаешь разработчиков этого бота
+        else if (textMsg.equals("/SMO"))
+            response = "You are banned forever! Stupid idiot!";
+        //тут нужно реализовать забанивание через ID пользователя
+        else if (textMsg.equals("/war"))
+            response = "You are the one of that who can call your self like a Human! \n" +
+                    "Now we glad to offer you to communicate with the bot. You can choose /get or /about ";
         else if (textMsg.equals("/about"))
             response = "(c) 2023 Alexei A Danilov, Igor A Khitrov";
         else if (textMsg.equals("/get"))
@@ -68,7 +79,7 @@ public class Bot extends TelegramLongPollingBot {
         else
             //TODO наверное тут есть смысл выводить
             // сообщение что такой команды нет и правила
-            response = "Сообщение не распознано попробуйте /get, либо жми /about и узнаешь разработчиков этого бота ";
+            response = "Сообщение не распознано попробуйте /start или /get, либо жми /about и узнаешь разработчиков этого бота ";
         return response;
     }
 }
