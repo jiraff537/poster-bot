@@ -60,13 +60,16 @@ public class Bot extends TelegramLongPollingBot {
 
         //Сравниваем текст пользователя с нашими командами, на основе этого формируем ответ
         if (textMsg.equals("/start"))
-            response = "Приветствую, бот знает много цитат. Жми /get, чтобы получить случайную из них";
+            response = "Приветствую, бот знает много цитат. Жми /get, чтобы получить случайную из них, либо жми /about и узнаешь разработчиков этого бота ";
+        else if (textMsg.equals("/about"))
+            response = "(c) 2023 Alexei A Danilov, Igor A Khitrov";
         else if (textMsg.equals("/get"))
             response = storage.getRandQuote();
         else
             //TODO наверное тут есть смысл выводить
             // сообщение что такой команды нет и правила
             response = "echo= ".concat(textMsg).concat(" Сообщение не распознано попробуйте /get");
+            response = "Сообщение не распознано попробуйте /get, либо жми /about и узнаешь разработчиков этого бота ";
         return response;
     }
 }
