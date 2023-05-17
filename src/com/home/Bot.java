@@ -65,7 +65,10 @@ public class Bot extends TelegramLongPollingBot {
             response = "(c) 2023 Alexei A Danilov, Igor A Khitrov";
         else if (textMsg.equals("/get"))
             response = storage.getRandQuote();
-        else
+        else if (textMsg.equals("/showbuttons")) {
+            response = "Кнопки";
+            //TODO тут надо добавить кнопки и сделать так чтобы они работали
+        } else
             //TODO наверное тут есть смысл выводить
             // сообщение что такой команды нет и правила
             response = "echo= ".concat(textMsg).concat(" Сообщение не распознано попробуйте /get, либо жми /about и узнаешь разработчиков этого бота ");
