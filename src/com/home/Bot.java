@@ -6,15 +6,33 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 public class Bot extends TelegramLongPollingBot {
-    //создаем две константы, присваиваем им значения токена и имя бота соответсвтенно
-    //вместо звездочек подставляйте свои данные
-    final private String BOT_TOKEN = "6082955134:AAEciF6NRJUBxWwTpmP7-pC760AwC3Dit78";
-    final private String BOT_NAME = "posteremigrantsbot";
+    private final String BOT_TOKEN;
+    private final String BOT_NAME;
     Storage storage;
 
     Bot() {
+        Properties props = loadProperties();
+        this.BOT_TOKEN = props.getProperty("bot.token");
+        this.BOT_NAME = props.getProperty("bot.name");
         storage = new Storage();
+    }
+
+    private Properties loadProperties() {
+        Properties props = new Properties();
+        try (InputStream input = new FileInputStream("application.properties")) {
+            props.load(input);
+        } catch (IOException e) {
+            System.err.println("Error loading application.properties: " + e.getMessage());
+            System.err.println("Please create application.properties file based on application.properties.example");
+            throw new RuntimeException("Failed to load configuration", e);
+        }
+        return props;
     }
 
     @Override
@@ -56,19 +74,18 @@ public class Bot extends TelegramLongPollingBot {
     }
 
     public String parseMessage(String textMsg) {
-        String response;
+        String response = switch (textMsg) {
+            case "/start" ->
+                    "Приветствую, бот знает много цитат. Жми /get, чтобы получить случайную из них, либо жми /about и узнаешь разработчиков этого бота ";
+            case "/about" -> "(c) 2023 Alexei A Danilov, Igor A Khitrov";
+            case "/get" -> storage.getRandQuote();
+            default ->
+                //TODO наверное тут есть смысл выводить
+                // сообщение что такой команды нет и правила
+                    "echo= ".concat(textMsg).concat(" Сообщение не распознано попробуйте /get, либо жми /about и узнаешь разработчиков этого бота ");
+        };
 
         //Сравниваем текст пользователя с нашими командами, на основе этого формируем ответ
-        if (textMsg.equals("/start"))
-            response = "Приветствую, бот знает много цитат. Жми /get, чтобы получить случайную из них, либо жми /about и узнаешь разработчиков этого бота ";
-        else if (textMsg.equals("/about"))
-            response = "(c) 2023 Alexei A Danilov, Igor A Khitrov";
-        else if (textMsg.equals("/get"))
-            response = storage.getRandQuote();
-        else
-            //TODO наверное тут есть смысл выводить
-            // сообщение что такой команды нет и правила
-            response = "echo= ".concat(textMsg).concat(" Сообщение не распознано попробуйте /get, либо жми /about и узнаешь разработчиков этого бота ");
         return response;
     }
 }
